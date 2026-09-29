@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.dya.cierres'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.dya.cierres"
+        minSdk 24
+        targetSdk 34
+        versionCode ((System.getenv('GITHUB_RUN_NUMBER') ?: '1') as Integer)
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('cierres.keystore')
+            storePassword 'cierres2026'
+            keyAlias 'cierres'
+            keyPassword 'cierres2026'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
